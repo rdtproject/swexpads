@@ -8,7 +8,6 @@ import pl.webcache.swexpads.domain.Add;
 @Repository
 public interface IAddRepository extends CrudRepository<Add, Long> {
 
-	@Override
-	Iterable<Add> findAllById(Iterable<Long> ids);
+	Add findByIdentifier(String identifier);
 
 }
