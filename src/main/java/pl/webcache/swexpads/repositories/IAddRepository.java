@@ -10,4 +10,7 @@ public interface IAddRepository extends CrudRepository<Add, Long> {
 
 	Add findByIdentifier(String identifier);
 
+	@Override
+	Iterable<Add> findAll();
+
 }

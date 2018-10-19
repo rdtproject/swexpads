@@ -23,13 +23,25 @@ public class AddService {
 	}
 
 	public Add findAddByIdentifier(String identifier) {
-
 		Add add = addRepository.findByIdentifier(identifier);
 		if (add == null) {
 			throw new AddIdException(String.format("Add with Identifier '%s' does not exist.", identifier));
 		}
 
 		return addRepository.findByIdentifier(identifier.toUpperCase());
+	}
+
+	public Iterable<Add> findAllAdds() {
+		return addRepository.findAll();
+	}
+
+	public void deleteAddByIdentifier(String identifier) {
+		Add add = addRepository.findByIdentifier(identifier);
+		if (add == null) {
+			throw new AddIdException(
+					String.format("Cannot delete Add with Identifier '%s'. This Add does not exist.", identifier));
+		}
+		addRepository.delete(add);
 	}
 
 }
