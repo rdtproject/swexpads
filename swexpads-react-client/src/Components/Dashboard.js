@@ -1,14 +1,23 @@
 import React, { Component } from "react";
-import AddItem from "./Add/AddItem";
+import AdItem from "./Add/AdItem";
+import CreateAdButton from "./Add/CreateAdButton";
 
 class Dashboard extends Component {
   render() {
     return (
-      <div>
-        <h1 className="alert alert-warning">Welcome to the Dashboard</h1>
-        <AddItem />
-        <AddItem />
-        <AddItem />
+      <div className="projects">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-12">
+              <h1 className="display-4 text-center">Ads</h1>
+              <br />
+              <CreateAdButton />
+              <br />
+              <hr />
+              <AdItem />
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
