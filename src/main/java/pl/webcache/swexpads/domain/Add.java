@@ -28,6 +28,8 @@ public class Add {
 	@NotBlank(message = "Add text cannot be empty")
 	private String text;
 	@JsonFormat(pattern = "yyyy-mm-dd")
+	private Date expirationDate;
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date creationDate;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date modificationDate;
@@ -65,6 +67,14 @@ public class Add {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public Date getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(Date expirationDate) {
+		this.expirationDate = expirationDate;
 	}
 
 	public Date getCreationDate() {
