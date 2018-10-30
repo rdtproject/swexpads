@@ -20,6 +20,7 @@ public class Add {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	@NotBlank
 	@Column(updatable = false, unique = true)
 	private String identifier;
 	@NotBlank(message = "Add subject cannot be empty")

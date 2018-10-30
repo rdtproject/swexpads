@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { createProject } from "../../actions/adActions";
+import classnames from "classnames";
 
 class AddAd extends Component {
   constructor() {
@@ -8,7 +12,8 @@ class AddAd extends Component {
       identifier: "",
       subject: "",
       text: "",
-      expirationDate: ""
+      expirationDate: "",
+      errors: {}
     };
 
     // zamiast onChange={this.onChange.bind(this)} przy kazdym inpucie
@@ -17,8 +22,15 @@ class AddAd extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  // lifecycle hooks do doczytania!
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
   onChange(e) {
-    // this.setState({ subject: e.target.value });
+    // zamiast this.setState({ subject: e.target.value });
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -32,62 +44,85 @@ class AddAd extends Component {
       expirationDate: this.state.expirationDate
     };
 
-    console.log(newAd);
+    this.props.createProject(newAd, this.props.history);
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
-      <div className="project">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-8 m-auto">
-              <h5 className="display-4 text-center">Create Ad form</h5>
-              <hr />
-              <form onSubmit={this.onSubmit}>
-                <div className="form-group">
+      // Klasyczny formularz html
+      <div>
+        <div className="add">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-8 m-auto">
+                <h5 className="display-4 text-center">Create Ad form</h5>
+                <hr />
+                <form onSubmit={this.onSubmit}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className={classnames("form-control form-control-lg ", {
+                        "is-invalid": errors.subject
+                      })}
+                      placeholder="Ad Subject"
+                      name="subject"
+                      value={this.state.subject}
+                      onChange={this.onChange}
+                    />
+                    {errors.subject && (
+                      <div className="invalid-feedback">{errors.subject}</div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.identifier
+                      })}
+                      placeholder="Unique Ad ID"
+                      name="identifier"
+                      value={this.state.identifier}
+                      onChange={this.onChange}
+                    />
+                    {errors.identifier && (
+                      <div className="invalid-feedback">
+                        {errors.identifier}
+                      </div>
+                    )}
+                  </div>
+                  <div className="form-group">
+                    <textarea
+                      className={classnames("form-control form-control-lg", {
+                        "is-invalid": errors.text
+                      })}
+                      placeholder="Ad Content"
+                      name="text"
+                      value={this.state.text}
+                      onChange={this.onChange}
+                    />
+                    {errors.text && (
+                      <div className="invalid-feedback">{errors.text}</div>
+                    )}
+                  </div>
+                  <h6>Expiration date</h6>
+                  <div className="form-group">
+                    <input
+                      type="date"
+                      className="form-control form-control-lg"
+                      name="expirationDate"
+                      value={this.state.expirationDate}
+                      onChange={this.onChange}
+                    />
+                    <p>{errors.expirationDate}</p>
+                  </div>
                   <input
-                    type="text"
-                    className="form-control form-control-lg "
-                    placeholder="Ad Subject"
-                    name="subject"
-                    value={this.state.subject}
-                    onChange={this.onChange}
+                    type="submit"
+                    className="btn btn-primary btn-block mt-4"
                   />
-                </div>
-                <div className="form-group">
-                  <input
-                    type="text"
-                    className="form-control form-control-lg"
-                    placeholder="Unique Ad ID"
-                    name="identifier"
-                    value={this.state.identifier}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <div className="form-group">
-                  <textarea
-                    className="form-control form-control-lg"
-                    placeholder="Ad Content"
-                    name="text"
-                    value={this.state.text}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <h6>Expiration date</h6>
-                <div className="form-group">
-                  <input
-                    type="date"
-                    className="form-control form-control-lg"
-                    name="expirationDate"
-                    value={this.state.expirationDate}
-                    onChange={this.onChange}
-                  />
-                </div>
-                <input
-                  type="submit"
-                  className="btn btn-primary btn-block mt-4"
-                />
-              </form>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -96,4 +131,16 @@ class AddAd extends Component {
   }
 }
 
-export default AddAd;
+AddAd.propTypes = {
+  createProject: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
+
+export default connect(
+  mapStateToProps,
+  { createProject }
+)(AddAd);
