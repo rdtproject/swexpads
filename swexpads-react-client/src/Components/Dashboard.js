@@ -12,6 +12,8 @@ class Dashboard extends Component {
   }
 
   render() {
+    const { projects } = this.props.project;
+
     return (
       <div className="projects">
         <div className="container">
@@ -22,7 +24,9 @@ class Dashboard extends Component {
               <CreateAdButton />
               <br />
               <hr />
-              <AdItem />
+              {projects.map(project => (
+                <AdItem key={project.id} project={project} />
+              ))}
             </div>
           </div>
         </div>
