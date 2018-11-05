@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AdItem extends Component {
   render() {
@@ -22,11 +23,11 @@ class AdItem extends Component {
                     <i className="fa fa-flag-checkered pr-1">Ads Board </i>
                   </li>
                 </a>
-                <a href="#">
+                <Link to={`/updateAd/${project.identifier}`}>
                   <li className="list-group-item update">
                     <i className="fa fa-edit pr-1">Update Ad Info</i>
                   </li>
-                </a>
+                </Link>
                 <a href="">
                   <li className="list-group-item delete">
                     <i className="fa fa-minus-circle pr-1">Delete Ad</i>

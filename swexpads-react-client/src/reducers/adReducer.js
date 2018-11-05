@@ -1,4 +1,4 @@
-import { GET_ADS } from "../actions/types";
+import { GET_ADS, GET_AD } from "../actions/types";
 
 const initialState = {
   projects: [],
@@ -11,6 +11,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         projects: action.payload
+      };
+
+    case GET_AD:
+      return {
+        ...state,
+        project: action.payload
       };
 
     default:

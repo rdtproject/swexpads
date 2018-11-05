@@ -31,6 +31,7 @@ public class Add {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date expirationDate;
 	@JsonFormat(pattern = "yyyy-mm-dd")
+	@Column(updatable = false)
 	private Date creationDate;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date modificationDate;

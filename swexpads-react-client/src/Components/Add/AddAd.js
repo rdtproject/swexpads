@@ -49,7 +49,6 @@ class AddAd extends Component {
 
   render() {
     const { errors } = this.state;
-
     return (
       // Klasyczny formularz html
       <div>
