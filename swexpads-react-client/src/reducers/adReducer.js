@@ -1,4 +1,4 @@
-import { GET_ADS, GET_AD } from "../actions/types";
+import { GET_ADS, GET_AD, DELETE_AD } from "../actions/types";
 
 const initialState = {
   projects: [],
@@ -17,6 +17,14 @@ export default function(state = initialState, action) {
       return {
         ...state,
         project: action.payload
+      };
+
+    case DELETE_AD:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          project => project.identifier !== action.payload
+        )
       };
 
     default:

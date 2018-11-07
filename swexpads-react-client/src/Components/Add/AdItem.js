@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { deleteAd } from "../../actions/adActions";
 
 class AdItem extends Component {
+  onDeleteClick = id => {
+    this.props.deleteAd(id);
+  };
+
   render() {
     const { project } = this.props;
 
@@ -28,11 +35,12 @@ class AdItem extends Component {
                     <i className="fa fa-edit pr-1">Update Ad Info</i>
                   </li>
                 </Link>
-                <a href="">
-                  <li className="list-group-item delete">
-                    <i className="fa fa-minus-circle pr-1">Delete Ad</i>
-                  </li>
-                </a>
+                <li
+                  className="list-group-item delete"
+                  onClick={this.onDeleteClick.bind(this, project.identifier)}
+                >
+                  <i className="fa fa-minus-circle pr-1">Delete Ad</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -42,4 +50,11 @@ class AdItem extends Component {
   }
 }
 
-export default AdItem;
+AdItem.propTypes = {
+  deleteAd: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { deleteAd }
+)(AdItem);
