@@ -2,17 +2,21 @@ package pl.webcache.swexpads.domain;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Add {
@@ -35,6 +39,10 @@ public class Add {
 	private Date creationDate;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date modificationDate;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "add")
+	@JsonIgnore
+	private AddDetails addDetails;
 
 	public Add() {
 	}
@@ -93,6 +101,14 @@ public class Add {
 
 	public void setModificationDate(Date modificationDate) {
 		this.modificationDate = modificationDate;
+	}
+
+	public AddDetails getAddDetails() {
+		return addDetails;
+	}
+
+	public void setAddDetails(AddDetails addDetails) {
+		this.addDetails = addDetails;
 	}
 
 	@PrePersist
