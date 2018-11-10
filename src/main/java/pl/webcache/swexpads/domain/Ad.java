@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -109,4 +111,13 @@ public class Ad {
 		this.adDetails = adDetails;
 	}
 
+	@PrePersist
+	protected void onCreate() {
+		this.creationDate = new Date();
+	}
+
+	@PreUpdate
+	protected void onUpdate() {
+		this.modificationDate = new Date();
+	}
 }
