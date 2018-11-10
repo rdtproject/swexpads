@@ -5,9 +5,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @SuppressWarnings("serial")
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class AddIdException extends RuntimeException {
+public class AdIdException extends RuntimeException {
 
-	public AddIdException(String message) {
+	public AdIdException(String message) {
 		super(message);
 	}
 

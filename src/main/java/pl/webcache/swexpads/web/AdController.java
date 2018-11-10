@@ -15,47 +15,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import pl.webcache.swexpads.domain.Add;
-import pl.webcache.swexpads.services.AddService;
+import pl.webcache.swexpads.domain.Ad;
+import pl.webcache.swexpads.services.AdService;
 import pl.webcache.swexpads.services.MapValidationErrorService;
 
 @RestController
 @RequestMapping("/api/project")
 @CrossOrigin
-public class AddController {
+public class AdController {
 
 	@Autowired
-	private AddService addService;
+	private AdService adService;
 
 	@Autowired
 	private MapValidationErrorService errorService;
 
 	@PostMapping("")
-	public ResponseEntity<?> createNewProject(@Valid @RequestBody Add add, BindingResult result) {
+	public ResponseEntity<?> createNewProject(@Valid @RequestBody Ad ad, BindingResult result) {
 		ResponseEntity<?> errorMap = errorService.mapValidationService(result);
 		if (errorMap != null)
 			return errorMap;
 
-		Add savedAdd = addService.saveOrUpdateAdd(add);
-		return new ResponseEntity<Add>(savedAdd, HttpStatus.CREATED);
+		Ad savedAdd = adService.saveOrUpdateAd(ad);
+		return new ResponseEntity<Ad>(savedAdd, HttpStatus.CREATED);
 	}
 
-	@GetMapping("/{addId}")
-	public ResponseEntity<?> getProjectById(@PathVariable String addId) {
-		Add add = addService.findAddByIdentifier(addId.toUpperCase());
-		return new ResponseEntity<Add>(add, HttpStatus.OK);
+	@GetMapping("/{adId}")
+	public ResponseEntity<?> getProjectById(@PathVariable String adId) {
+		Ad add = adService.findAdByIdentifier(adId.toUpperCase());
+		return new ResponseEntity<Ad>(add, HttpStatus.OK);
 	}
 
 	@GetMapping("/all")
-	public Iterable<Add> getAllAdds() {
-		return addService.findAllAdds();
+	public Iterable<Ad> getAllAds() {
+		return adService.findAllAds();
 	}
 
-	@DeleteMapping("/{addId}")
-	public ResponseEntity<?> deleteAdd(@PathVariable String addId) {
-		addService.deleteAddByIdentifier(addId.toUpperCase());
+	@DeleteMapping("/{adId}")
+	public ResponseEntity<?> deleteAd(@PathVariable String adId) {
+		adService.deleteAddByIdentifier(adId.toUpperCase());
 		return new ResponseEntity<String>(
-				String.format("Project with Identifier %s has been deleted successfully", addId), HttpStatus.OK);
+				String.format("Project with Identifier %s has been deleted successfully", adId), HttpStatus.OK);
 	}
 
 }

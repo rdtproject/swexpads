@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import pl.webcache.swexpads.domain.AddItem;
+import pl.webcache.swexpads.domain.AdItem;
 
 @Repository
-public interface IAddItemRepository extends CrudRepository<AddItem, Long> {
+public interface IAdItemRepository extends CrudRepository<AdItem, Long> {
 
-	List<AddItem> findByAddIdentifierOrderByPriority(String id);
+	List<AdItem> findByAdIdentifierOrderByPriority(String id);
 
 }

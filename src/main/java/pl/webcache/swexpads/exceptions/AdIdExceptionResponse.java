@@ -1,9 +1,9 @@
 package pl.webcache.swexpads.exceptions;
 
-public class AddIdExceptionResponse {
+public class AdIdExceptionResponse {
 	private String addIdentifier;
 
-	public AddIdExceptionResponse(String addIdentifier) {
+	public AdIdExceptionResponse(String addIdentifier) {
 		this.addIdentifier = addIdentifier;
 	}
 

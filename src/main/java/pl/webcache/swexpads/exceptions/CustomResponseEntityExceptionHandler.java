@@ -18,8 +18,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler
-	public final ResponseEntity<Object> handleAddIdException(AddIdException ex, WebRequest request) {
-		AddIdExceptionResponse exceptionResponse = new AddIdExceptionResponse(ex.getMessage());
+	public final ResponseEntity<Object> handleAddIdException(AdIdException ex, WebRequest request) {
+		AdIdExceptionResponse exceptionResponse = new AdIdExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 

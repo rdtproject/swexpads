@@ -16,23 +16,23 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AddDetails {
+public class AdDetails {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Integer PTSequence = 0;
-	private String addIdentifier;
+	private String adIdentifier;
 
-	// one to one with add
+	// one to one with ad
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "add_id", nullable = false)
+	@JoinColumn(name = "ad_id", nullable = false)
 	@JsonIgnore
-	private Add add;
+	private Ad ad;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adDetails")
-	private List<AddItem> addItems = new ArrayList<AddItem>();
+	private List<AdItem> adItems = new ArrayList<AdItem>();
 
-	public AddDetails() {
+	public AdDetails() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -52,28 +52,28 @@ public class AddDetails {
 		PTSequence = pTSequence;
 	}
 
-	public String getAddIdentifier() {
-		return addIdentifier;
+	public String getAdIdentifier() {
+		return adIdentifier;
 	}
 
-	public void setAddIdentifier(String addIdentifier) {
-		this.addIdentifier = addIdentifier;
+	public void setAdIdentifier(String adIdentifier) {
+		this.adIdentifier = adIdentifier;
 	}
 
-	public Add getAdd() {
-		return add;
+	public Ad getAd() {
+		return ad;
 	}
 
-	public void setAdd(Add add) {
-		this.add = add;
+	public void setAd(Ad ad) {
+		this.ad = ad;
 	}
 
-	public List<AddItem> getAddItems() {
-		return addItems;
+	public List<AdItem> getAdItems() {
+		return adItems;
 	}
 
-	public void setAddItems(List<AddItem> addItems) {
-		this.addItems = addItems;
+	public void setAdItems(List<AdItem> adItems) {
+		this.adItems = adItems;
 	}
 
 }

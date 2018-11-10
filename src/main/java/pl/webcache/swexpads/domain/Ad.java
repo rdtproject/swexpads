@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -19,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Add {
+public class Ad {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +25,10 @@ public class Add {
 	@NotBlank
 	@Column(updatable = false, unique = true)
 	private String identifier;
-	@NotBlank(message = "Add subject cannot be empty")
+	@NotBlank(message = "Ad subject cannot be empty")
 	@Size(min = 5, max = 200, message = "Subject can have from 10 to 2000 characters")
 	private String subject;
-	@NotBlank(message = "Add text cannot be empty")
+	@NotBlank(message = "Ad text cannot be empty")
 	private String text;
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date expirationDate;
@@ -40,11 +38,11 @@ public class Add {
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date modificationDate;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "add")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ad")
 	@JsonIgnore
-	private AddDetails addDetails;
+	private AdDetails adDetails;
 
-	public Add() {
+	public Ad() {
 	}
 
 	public Long getId() {
@@ -103,21 +101,12 @@ public class Add {
 		this.modificationDate = modificationDate;
 	}
 
-	public AddDetails getAddDetails() {
-		return addDetails;
+	public AdDetails getAdDetails() {
+		return adDetails;
 	}
 
-	public void setAddDetails(AddDetails addDetails) {
-		this.addDetails = addDetails;
+	public void setAdDetails(AdDetails adDetails) {
+		this.adDetails = adDetails;
 	}
 
-	@PrePersist
-	protected void onCreate() {
-		this.creationDate = new Date();
-	}
-
-	@PreUpdate
-	protected void onUpdate() {
-		this.modificationDate = new Date();
-	}
 }

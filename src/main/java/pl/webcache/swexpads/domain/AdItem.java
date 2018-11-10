@@ -19,12 +19,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class AddItem {
+public class AdItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@Column(updatable = false)
-	private String addSequence;
+	private String adSequence;
 	@NotBlank(message = "Please include a project summary")
 	private String summary;
 	private String acceptanceCriteria;
@@ -32,14 +32,14 @@ public class AddItem {
 	private Integer priority;
 	private Date dueDate;
 
-	// ManyToOne with AddDetails
+	// ManyToOne with AdDetails
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
-	@JoinColumn(name = "add_details_id", updatable = false, nullable = false)
+	@JoinColumn(name = "ad_details_id", updatable = false, nullable = false)
 	@JsonIgnore
-	private AddDetails adDetails;
+	private AdDetails adDetails;
 
 	@Column(updatable = false)
-	private String addIdentifier;
+	private String adIdentifier;
 
 	@JsonFormat(pattern = "yyyy-mm-dd")
 	@Column(updatable = false)
@@ -55,12 +55,12 @@ public class AddItem {
 		this.id = id;
 	}
 
-	public String getAddSequence() {
-		return addSequence;
+	public String getAdSequence() {
+		return adSequence;
 	}
 
-	public void setAddSequence(String addSequence) {
-		this.addSequence = addSequence;
+	public void setAdSequence(String adSequence) {
+		this.adSequence = adSequence;
 	}
 
 	public String getSummary() {
@@ -103,19 +103,19 @@ public class AddItem {
 		this.dueDate = dueDate;
 	}
 
-	public String getAddIdentifier() {
-		return addIdentifier;
+	public String getAdIdentifier() {
+		return adIdentifier;
 	}
 
-	public void setAddIdentifier(String addIdentifier) {
-		this.addIdentifier = addIdentifier;
+	public void setAdIdentifier(String adIdentifier) {
+		this.adIdentifier = adIdentifier;
 	}
 
-	public AddDetails getAdDetails() {
+	public AdDetails getAdDetails() {
 		return adDetails;
 	}
 
-	public void setAdDetails(AddDetails adDetails) {
+	public void setAdDetails(AdDetails adDetails) {
 		this.adDetails = adDetails;
 	}
 
@@ -131,10 +131,10 @@ public class AddItem {
 
 	@Override
 	public String toString() {
-		return "AddItem [id=" + id + ", addSequence=" + addSequence + ", summary=" + summary + ", acceptanceCriteria="
+		return "AdItem [id=" + id + ", adSequence=" + adSequence + ", summary=" + summary + ", acceptanceCriteria="
 				+ acceptanceCriteria + ", status=" + status + ", priority=" + priority + ", dueDate=" + dueDate
-				+ ", addIdentifier=" + addIdentifier + ", creationDate=" + creationDate + ", modificationDate="
-				+ modificationDate + "]";
+				+ ", adDetails=" + adDetails + ", adIdentifier=" + adIdentifier + ", creationDate=" + creationDate
+				+ ", modificationDate=" + modificationDate + "]";
 	}
 
 }

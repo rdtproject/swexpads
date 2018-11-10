@@ -3,14 +3,14 @@ package pl.webcache.swexpads.repositories;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import pl.webcache.swexpads.domain.Add;
+import pl.webcache.swexpads.domain.Ad;
 
 @Repository
-public interface IAddRepository extends CrudRepository<Add, Long> {
+public interface IAdRepository extends CrudRepository<Ad, Long> {
 
-	Add findByIdentifier(String identifier);
+	Ad findByIdentifier(String identifier);
 
 	@Override
-	Iterable<Add> findAll();
+	Iterable<Ad> findAll();
 
 }
