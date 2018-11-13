@@ -23,7 +23,7 @@ public class AdItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(updatable = false)
+	@Column(updatable = false, unique = true)
 	private String adSequence;
 	@NotBlank(message = "Please include a project summary")
 	private String summary;
@@ -33,7 +33,7 @@ public class AdItem {
 	private Date dueDate;
 
 	// ManyToOne with AdDetails
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ad_details_id", updatable = false, nullable = false)
 	@JsonIgnore
 	private AdDetails adDetails;

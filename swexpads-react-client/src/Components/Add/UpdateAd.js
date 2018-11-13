@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { getAd, createProject } from "../../actions/adActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
 
 // rcc
 class UpdateAd extends Component {

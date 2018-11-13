@@ -29,7 +29,7 @@ public class AdDetails {
 	@JsonIgnore
 	private Ad ad;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "adDetails")
+	@OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "adDetails", orphanRemoval = true)
 	private List<AdItem> adItems = new ArrayList<AdItem>();
 
 	public AdDetails() {

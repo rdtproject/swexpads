@@ -8,6 +8,8 @@ import AddAd from "./Components/Add/AddAd";
 import { Provider } from "react-redux";
 import store from "./store";
 import UpdateAd from "./Components/Add/UpdateAd";
+import AdBoard from "./Components/AdBoard/AdBoard";
+import AddAdItem from "./Components/AdBoard/AdItems/AddAdItem";
 
 class App extends Component {
   render() {
@@ -19,6 +21,8 @@ class App extends Component {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/addAd" component={AddAd} />
             <Route exact path="/updateAd/:id" component={UpdateAd} />
+            <Route exact path="/adBoard/:id" component={AdBoard} />
+            <Route exact path="/addAdItem/:id" component={AddAdItem} />
           </div>
         </Router>
       </Provider>

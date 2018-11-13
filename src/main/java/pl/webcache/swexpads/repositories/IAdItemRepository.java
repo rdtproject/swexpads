@@ -12,4 +12,6 @@ public interface IAdItemRepository extends CrudRepository<AdItem, Long> {
 
 	List<AdItem> findByAdIdentifierOrderByPriority(String id);
 
+	AdItem findByAdSequence(String sequence);
+
 }

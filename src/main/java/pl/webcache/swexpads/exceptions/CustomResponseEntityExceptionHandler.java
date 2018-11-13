@@ -9,7 +9,7 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
- * Exceptions can come hire for advice. Than it will be handled properly. Global
+ * Exceptions can come here for advice. Than it will be handled properly. Global
  * exception handling.
  */
 
@@ -20,6 +20,12 @@ public class CustomResponseEntityExceptionHandler extends ResponseEntityExceptio
 	@ExceptionHandler
 	public final ResponseEntity<Object> handleAddIdException(AdIdException ex, WebRequest request) {
 		AdIdExceptionResponse exceptionResponse = new AdIdExceptionResponse(ex.getMessage());
+		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
+	}
+
+	@ExceptionHandler
+	public final ResponseEntity<Object> handleAdNotFoundException(AdNotFoundException ex, WebRequest request) {
+		AdNotFoundExceptionResponse exceptionResponse = new AdNotFoundExceptionResponse(ex.getMessage());
 		return new ResponseEntity<Object>(exceptionResponse, HttpStatus.BAD_REQUEST);
 	}
 
