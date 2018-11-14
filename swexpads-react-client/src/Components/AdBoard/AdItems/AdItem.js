@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class AdItem extends Component {
   render() {
@@ -32,9 +33,12 @@ class AdItem extends Component {
           <p className="card-text text-truncate ">
             {ad_item.acceptanceCriteria}
           </p>
-          <a href="" className="btn btn-primary">
+          <Link
+            to={`/updateAdItem/${ad_item.adIdentifier}/${ad_item.adSequence}`}
+            className="btn btn-primary"
+          >
             View / Update
-          </a>
+          </Link>
 
           <button className="btn btn-danger ml-4">Delete</button>
         </div>

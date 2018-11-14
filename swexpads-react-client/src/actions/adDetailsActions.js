@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_AD_DETAILS } from "./types";
+import { GET_ERRORS, GET_AD_DETAILS, GET_AD_ITEM } from "./types";
 
 export const addAdItem = (
   ad_details_id,
@@ -29,5 +29,27 @@ export const getAdDetails = ad_details_id => async dispatch => {
       type: GET_AD_DETAILS,
       payload: res.data
     });
-  } catch (error) {}
+  } catch (error) {
+    // po wprowadzeniu tej sekcji widac bledy w dev toolsach w redux (errors)
+    dispatch({
+      type: GET_ERRORS,
+      payload: error.response.data
+    });
+  }
+};
+
+export const getAdItem = (
+  ad_details_id,
+  ad_item,
+  history
+) => async dispatch => {
+  try {
+    const res = await axios.get(`/api/backlog/${ad_details_id}/${ad_item}`);
+    dispatch({
+      type: GET_AD_ITEM,
+      payload: res.data
+    });
+  } catch (error) {
+    history.push(`/dashboard`);
+  }
 };

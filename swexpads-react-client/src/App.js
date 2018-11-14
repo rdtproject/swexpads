@@ -10,6 +10,7 @@ import store from "./store";
 import UpdateAd from "./Components/Add/UpdateAd";
 import AdBoard from "./Components/AdBoard/AdBoard";
 import AddAdItem from "./Components/AdBoard/AdItems/AddAdItem";
+import UpdateAdItem from "./Components/AdBoard/AdItems/UpdateAdItem";
 
 class App extends Component {
   render() {
@@ -23,6 +24,11 @@ class App extends Component {
             <Route exact path="/updateAd/:id" component={UpdateAd} />
             <Route exact path="/adBoard/:id" component={AdBoard} />
             <Route exact path="/addAdItem/:id" component={AddAdItem} />
+            <Route
+              exact
+              path="/updateAdItem/:ad_details_id/:ad_item_id"
+              component={UpdateAdItem}
+            />
           </div>
         </Router>
       </Provider>
